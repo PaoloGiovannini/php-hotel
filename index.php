@@ -40,17 +40,63 @@
 
     ];
 
-    foreach($hotels as $hotel){
-        echo "<h2>" .$hotel['name'] ."</h2>";
-        echo "<p>" .$hotel['description'] ."</p>";
-         if ($hotel["parking"] == true) {
-        echo "<span> Con parcheggio </span>" ."<br>";
-        } else {
-        echo "<span> Senza parcheggio </span>" ."<br>";
-        }
-        echo "<span>Voto:" .$hotel['vote'] ."</span>" ."<br>";
-        echo "<span>Distanza dal centro:" .$hotel['distance_to_center'] ."</span>";
-        echo "<hr>";
-    }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Tabella Hotel</h1>
+    
+    <table class="table">
+        <thead>
+            <tr class="table-info">
+                <?php 
+                    foreach($hotels[0] as $key => $value ){
+                        if($key == 'name'){
+                            $key = 'Nome';    
+                        }elseif($key == 'description'){
+                            $key = 'Descrizione';
+                        }elseif($key == 'parking'){
+                            $key = 'Parcheggio';
+                        }elseif($key == 'vote'){
+                            $key = 'Voto';
+                        }elseif($key == 'distance_to_center'){
+                            $key = 'Distanza dal centro';
+                        }
+
+                        echo "<th scope='col'>". $key ."</th>";
+                    }
+                ?>
+            </tr>
+        </thead>
+            <tbody>
+                <?php 
+                    foreach($hotels as $hotel){
+
+                        echo '<tr class="table-primary">';
+                        foreach($hotel as $key => $value){
+
+                            if($key == 'parking' ){
+
+                                if($value == true){
+                                    $value = 'Si';
+                                }else{
+                                    $value = 'No';
+                                }
+                            }
+                            echo "<td>". $value ."</td>";
+                        }
+                        echo '</tr>';
+                    }
+                ?>
+            </tbody>
+    </table>
+</body>
+</html>
